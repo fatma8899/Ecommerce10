@@ -1,5 +1,4 @@
 import nodemailer from "nodemailer";
-import { join } from "path";
 
 export const sendEmail = async (to, subject, html) =>{
 
@@ -16,7 +15,6 @@ const transporter = nodemailer.createTransport({
     to: to,
     subject: subject , 
     html: html, 
-    attachments
     });
         return true;
 }

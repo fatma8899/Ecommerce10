@@ -7,6 +7,7 @@ import cartModel from "../../../DB/models/cart.model.js";
 import { createInvoice } from "../../utils/pdf.js"
 import Stripe from "stripe";
 import { payments } from "../../utils/payment.js";
+import sendEmail  from "../../service/sendEmail.js"
 
 
 // <<<<<<<<<<<<<<<<<createorder>>>>>>>>>>>>>>>>>>>>>
