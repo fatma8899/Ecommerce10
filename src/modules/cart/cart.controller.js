@@ -1,4 +1,4 @@
-import cartModel from "../../../db/models/cart.model.js";
+import cartModel from "../../../DB/models/cart.model.js";
 import { asynchandler } from "../../utils/asyncHandler.js";
 import { AppError } from "../../utils/classError.js";
 import productModel from "../../../DB/models/product.model.js"
