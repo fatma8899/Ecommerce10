@@ -3,7 +3,7 @@ import orderModel from "../../../DB/models/order.model.js";
 import { asynchandler } from "../../utils/asyncHandler.js"; 
 import { AppError } from "../../utils/classError.js";
 import couponModel from "../../../DB/models/coupon.model.js";
-// import cartModel from "../../../db/models/cart.model.js";
+import cartModel from "../../../db/models/cart.model.js";
 
 
 
