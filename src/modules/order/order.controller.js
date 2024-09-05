@@ -4,6 +4,7 @@ import { asynchandler } from "../../utils/asyncHandler.js";
 import { AppError } from "../../utils/classError.js";
 import couponModel from "../../../DB/models/coupon.model.js";
 import cartModel from "../../../DB/models/cart.model.js";
+import { createInvoice } from "../../utils/pdf.js"
 import Stripe from "stripe";
 import { payments } from "../../utils/payment.js";
 
@@ -78,30 +79,30 @@ export const createorder= asynchandler(async(req,res,next)=>{
         await cartModel.updateOne({user:req.user_id},{products:[]})
         
     }
-    // const invoice={
-    //     shipping:{
-    //         name:req.user.name,
-    //         address: req.user.address,
-    //         city:"egypt",
-    //         state:"cairo",
-    //         country:"cairo",
-    //         postal_code:47111
-    //     },
-    //     items:order.products,
-    //     subtotal:order.subPrice,
-    //     paid:order.finalPrice,
-    //     invoivce_nr:order._id,
-    //     date: order.createdAt,
-    //     coupon: req.body?.coupon?.amount || 0 
-    //     }
+    const invoice={
+        shipping:{
+            name:req.user.name,
+            address: req.user.address,
+            city:"egypt",
+            state:"cairo",
+            country:"cairo",
+            postal_code:47111
+        },
+        items:order.products,
+        subtotal:order.subPrice,
+        paid:order.finalPrice,
+        invoivce_nr:order._id,
+        date: order.createdAt,
+        coupon: req.body?.coupon?.amount || 0 
+        }
     
-    //     await createInvoice(invoice,"invoice.pdf")
-    //     await sendEmail(req.user.email,`order placed`,`order is arraived`,[
-    //         {
-    //         path: `invoice.pdf`,
-    //         contentType: `application/pdf`
-    //     }
-    // ])
+        await createInvoice(invoice,"invoice.pdf")
+        await sendEmail(req.user.email,`order placed`,`order is arraived`,[
+            {
+            path: `invoice.pdf`,
+            contentType: `application/pdf`
+        }
+    ])
     ////////////////////////////////////////////////////////////////////////////////////
     if (paymentMethod == "visa") {
         const stripe = new Stripe(process.env.strip_secret)

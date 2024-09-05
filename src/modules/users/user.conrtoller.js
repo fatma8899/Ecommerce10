@@ -20,11 +20,11 @@ export const signUp = asynchandler(async(req,res,next)=>{
     const reftoken = jwt.sign({ email }, process.env.refpass)
     const reflink = `${req.protocol}://${req.headers.host}/users/reconfirmEmail/${reftoken}`
     
-    // const checkSendEmail = await sendEmail(email, "hello", `<a href="${link}">confirm your email</a> <br>
-    //     <a href='${reflink}'>click to resend the link</a>   `)
-    // if (!checkSendEmail) {
-    //     return next(new AppError("Email not sent"))
-    // }   
+    const checkSendEmail = await sendEmail(email, "hello", `<a href="${link}">confirm your email</a> <br>
+        <a href='${reflink}'>click to resend the link</a>   `)
+    if (!checkSendEmail) {
+        return next(new AppError("Email not sent"))
+    }   
     const hash= bcrypt.hashSync(password,+process.env.round)
     const user= await userModel.create({name,email,password:hash,age,phone,address})
     if (!user) {

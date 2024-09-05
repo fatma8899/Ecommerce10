@@ -74,7 +74,7 @@ export const updatebrand=asynchandler(async(req,res,next)=>{
     return res.status(200).json({brand})
 })
 
-// <<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>
+// <<<<<<<<<<<<<<<<<<<<<<getbrand>>>>>>>>>>>>>>>>>>>>>>>>
 export const getbrand = asynchandler (async(req,res,next)=>{
     const brand=await brandmodel.find({})
 
