@@ -14,5 +14,6 @@ router.post("/add",validation(OV.createordervalidation),auth(Object.values(syste
 router.put("/:id",validation(OV.cancelOrdervalidation),auth(Object.values(systemroles)),OC.cancelOrder)
 
 
+router.post('/webhook', express.raw({ type: 'application/json' }),OC.webhook)
 
 export default router

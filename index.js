@@ -20,6 +20,14 @@ const app = express();
 const port = process.env.PORT || 7001
 app.use(cors());
 
+app.use((req, res, next) => {
+    if (req.originalUrl == "/order/webhook") {
+        next()
+    } else {
+        express.json()(req, res,next)
+}
+})
+
 app.get("/", ( req, res) =>{
     res.status(200).json({ msg: "hello on my project" })
 })
