@@ -26,6 +26,9 @@ export const auth = (roles = []) =>{
             if (!roles.includes(user.role)){
                 return res.status(401).json({ msg:"you dont have permission"})
             }
+            if(parseInt(user?.changepassword?.getTime()/1000)>decoded.iat){
+                return next(new AppError("you need to  login"));
+            }
             req.user = user
             next()
         }catch (error) {
@@ -33,3 +36,4 @@ export const auth = (roles = []) =>{
         }
     }
 }
+auth()

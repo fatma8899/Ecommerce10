@@ -18,10 +18,7 @@ const transporter = nodemailer.createTransport({
     html: html, 
     attachments
     });
-        if(info.accepted.length) {
-            return true
-        }
-        return false;
+        return true;
 }
 
 export default sendEmail
